@@ -23,13 +23,16 @@
     "migration:generate": "npm run typeorm -- -d ./src/database/datasource.ts migration:generate ./database/migrations/generated",
     "migration:create": "npm run typeorm -- migration:create ./database/migrations/generated",
     "migration:revert": "npm run typeorm -- -d ./src/database/datasource.ts migration:revert",
-    "migration:show": "npm run typeorm -- migration:show -d ./src/database/datasource.ts"
+    "migration:show": "npm run typeorm -- migration:show -d ./src/database/datasource.ts",
+    "generate:api-client-win": "docker run --rm -v %cd%/api:/local/api -v %cd%/../angular-frontend/src/api-client/generated:/local/api-client openapitools/openapi-generator-cli generate -i /local/api/api-json.json -g typescript-angular -o /local/api-client",
+    "generate:api-client-mac": "docker run --rm -v $(pwd)/api:/local/api -v $(pwd)/../angular-frontend/src/api-client/generated:/local/api-client openapitools/openapi-generator-cli generate -i /local/api/api-json.json -g typescript-angular -o /local/api-client"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/swagger": "^11.2.0",
     "@nestjs/typeorm": "^11.0.0",
     "mysql2": "^3.14.1",
     "reflect-metadata": "^0.2.2",
