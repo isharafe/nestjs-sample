@@ -1,7 +1,9 @@
-import { Controller, Put, Body, Param, Post, Get } from '@nestjs/common';
+import { Controller, Put, Body, Param, Post, Get, UseGuards } from '@nestjs/common';
 import { TestService } from '../service/test.service';
 import { TestDto } from './dto/test.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { AuthenticationGuard } from 'src/authentication/guards/authentication.guard';
+
 
 @ApiTags('test')
 @Controller('test')
@@ -10,6 +12,8 @@ export class TestController {
         this.testService =  this.testService;
     }
 
+    @ApiBearerAuth() /* This swagger decorator is used to indicate that the endpoint requires authentication */
+    @UseGuards(AuthenticationGuard)
     @Get()
     async findAll(): Promise<TestDto[]> {
         let models = await this.testService.findAll();
