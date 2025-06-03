@@ -1,11 +1,15 @@
+import { IsNotEmpty, IsNumber } from "class-validator";
 import { TestModel } from "src/test/model/test.model";
 
 export class TestDto {
 
+    @IsNumber()
     id: number;
 
+    @IsNumber()
     version: number;
 
+    @IsNotEmpty()
     name: string;
 
     description: string;
